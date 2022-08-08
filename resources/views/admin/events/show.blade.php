@@ -16,6 +16,14 @@
                 <tbody>
                     <tr>
                         <th>
+                            {{ trans('cruds.event.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $event->status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.event.fields.id') }}
                         </th>
                         <td>
@@ -86,14 +94,7 @@
                             {{ $event->room->resp_no }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.event.fields.status') }}
-                        </th>
-                        <td>
-                            {{ $event->status }}
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
             <div class="form-group">
