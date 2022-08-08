@@ -26,6 +26,8 @@ class Room extends Model
         'deleted_at',
         'description',
         'location',
+        'resp',
+        'resp_no',
     ];
 
     protected function serializeDate(DateTimeInterface $date)

@@ -1,10 +1,23 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\PrintReportController;
+use App\Http\Controllers\Admin\EventsController;
 
-    Route::get('/', [CustomAuthController::class, 'home']); 
-    Route::get('signup', [CustomAuthController::class, 'signup'])->name('register');
-    Route::post('postsignup', [CustomAuthController::class, 'signupsave'])->name('register'); 
+Route::get('/', [CustomAuthController::class, 'home']); 
+Route::get('signup', [CustomAuthController::class, 'signup'])->name('register');
+Route::post('postsignup', [CustomAuthController::class, 'signupsave'])->name('register');
+
+
+//tampilkan menu print
+Route::get('showpdf', [EventsController::class, 'showpdf'])->name('showpdf');
+Route::get('events/accept{id}',[EventsController::class, 'accept'])->name('accept');
+Route::get('events/deny{id}',[EventsController::class, 'deny'])->name('deny');
+
+// Route::get('/user/{id}/show', function ($events) {
+//     echo 'user Id = '.  $events;
+// })->name('show');
+
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -14,6 +27,8 @@ Route::get('/home', function () {
 
     return redirect()->route('admin.home');
 });
+
+
 
 route::auth();
 // Admin
@@ -48,8 +63,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('my-credits', 'BalanceController@index')->name('balance.index');
     Route::post('add-balance', 'BalanceController@add')->name('balance.add');
 
-    Route::resource('transactions', 'TransactionsController')->only(['index']);
-
+    Route::resource('transactions', 'TransactionsController')->only(['index']);    
     
     
 });

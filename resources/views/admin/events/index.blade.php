@@ -13,7 +13,6 @@
     <div class="card-header">
         {{ trans('cruds.event.title_singular') }}
     </div>
-
     <div class="card-body">
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Event">
@@ -22,14 +21,25 @@
                         <th width="10">
 
                         </th>
+                        
+                        
                         <th>
                             {{ trans('cruds.event.fields.id') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.event.fields.accept') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.event.fields.deny') }}
                         </th>
                         <th>
                             {{ trans('cruds.event.fields.room') }}
                         </th>
                         <th>
                             {{ trans('cruds.event.fields.user') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.room.fields.capacity') }}
                         </th>
                         <th>
                             {{ trans('cruds.event.fields.title') }}
@@ -44,6 +54,16 @@
                             {{ trans('cruds.event.fields.description') }}
                         </th>
                         <th>
+                            {{ trans('cruds.event.fields.resp') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.event.fields.resp_no') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.event.fields.status') }}
+                        </th>
+                        
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -54,14 +74,28 @@
                             <td>
 
                             </td>
+                            
                             <td>
                                 {{ $event->id ?? '' }}
+                            </td>
+                            <td>
+                                @can('event_accept')
+                                <a class="btn btn-success" href="{{ route('accept', $event->id) }}">Terima</a>
+                                @endcan
+                            </td>
+                            <td>
+                                @can('event_accept')
+                                <a class="btn btn-danger" href="{{ route('deny', $event->id) }}">Tolak</a>
+                                @endcan
                             </td>
                             <td>
                                 {{ $event->room->name ?? '' }}
                             </td>
                             <td>
                                 {{ $event->user->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $event->room->capacity ?? '' }}
                             </td>
                             <td>
                                 {{ $event->title ?? '' }}
@@ -74,6 +108,18 @@
                             </td>
                             <td>
                                 {{ $event->description ?? '' }}
+                            </td>
+
+                            <td>
+                                {{ $event->room->resp ?? '' }}
+                            </td>
+
+                            <td>
+                                {{ $event->room->resp_no ?? '' }}
+                            </td>
+
+                            <td>
+                                {{ $event->status ?? '' }}
                             </td>
                             <td>
                                 @can('event_show')

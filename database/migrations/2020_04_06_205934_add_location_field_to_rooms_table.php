@@ -15,6 +15,8 @@ class AddLocationFieldToRoomsTable extends Migration
     {
         Schema::table('rooms', function (Blueprint $table) {
             $table->string('location');;
+            $table->string('resp');;
+            $table->string('resp_no');;
         });
     }
 

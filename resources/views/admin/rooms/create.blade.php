@@ -40,7 +40,7 @@
                 <span class="help-block">{{ trans('cruds.room.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="location">{{ trans('cruds.room.fields.location') }}</label>
+                <label for="location">{{ trans('cruds.room.fields.location') }}</label>
                 <input class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text" name="location" id="location" value="{{ old('location', '') }}">
                 @if($errors->has('location'))
                     <div class="invalid-feedback">
@@ -48,6 +48,26 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.room.fields.location_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="resp">{{ trans('cruds.room.fields.resp') }}</label>
+                <input class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text" name="resp" id="resp" value="{{ old('resp', '') }}">
+                @if($errors->has('resp'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('resp') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.room.fields.resp_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="resp_no">{{ trans('cruds.room.fields.resp_no') }}</label>
+                <input class="form-control {{ $errors->has('resp_no') ? 'is-invalid' : '' }}" type="text" name="resp_no" id="resp_no" value="{{ old('resp_no', '') }}">
+                @if($errors->has('resp_no'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('resp_no') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.room.fields.resp_no_helper') }}</span>
             </div>
             {{-- <div class="form-group">
                 <label for="hourly_rate">{{ trans('cruds.room.fields.hourly_rate') }}</label>

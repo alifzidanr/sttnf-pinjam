@@ -116,6 +116,19 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '27',
                 'title' => 'transaction_access',
             ],
+            [
+                'id'    => '28',
+                'title' => 'event_showpdf',
+            ],
+            [
+                'id'    => '29',
+                'title' => 'event_accept',
+            ],
+            [
+                'id'    => '30',
+                'title' => 'event_deny',
+            ],
+
         ];
 
         Permission::insert($permissions);

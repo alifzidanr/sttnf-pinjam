@@ -23,14 +23,18 @@ class Event extends Model
 
     protected $fillable = [
         'title',
+        'approve',
+        'deny',
         'room_id',
         'user_id',
+        'capacity',
         'end_time',
         'start_time',
         'created_at',
         'updated_at',
         'deleted_at',
         'description',
+        'status',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -44,12 +48,17 @@ class Event extends Model
         return $this->belongsTo(Room::class, 'room_id');
 
     }
-
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
 
     }
+
 
     public function getStartTimeAttribute($value)
     {

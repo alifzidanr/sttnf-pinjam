@@ -84,6 +84,16 @@ class EventsController extends Controller
         return view('admin.events.show', compact('event'));
     }
 
+    public function showpdf(Event $event)
+    {
+        // abort_if(Gate::denies('event_showpdf'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
+        $event->load('room', 'user');
+       
+        return view('admin.events.showpdf', compact('event'));
+    }
+
+    
     public function destroy(Event $event)
     {
         abort_if(Gate::denies('event_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -94,11 +104,30 @@ class EventsController extends Controller
 
     }
 
+
     public function massDestroy(MassDestroyEventRequest $request)
     {
         Event::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
 
+    }
+
+    public function accept($id){
+        abort_if(Gate::denies('event_accept'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $event=Event::find($id);
+        $event->status='Diterima';
+        $event->save();
+
+        return redirect()->back();
+    }
+
+    public function deny($id){
+        abort_if(Gate::denies('event_deny'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $event=Event::find($id);
+        $event->status='Ditolak';
+        $event->delete();
+
+        return redirect()->back();
     }
 }

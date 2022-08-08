@@ -39,6 +39,14 @@ class EventsApiController extends Controller
 
     }
 
+    public function showpdf(Event $event)
+    {
+        abort_if(Gate::denies('event_showpdf'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return new EventResource($event->load(['room', 'user']));
+
+    }
+
     public function update(UpdateEventRequest $request, Event $event)
     {
         $event->update($request->all());

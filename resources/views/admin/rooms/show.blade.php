@@ -55,6 +55,22 @@
                             {{ $room->location }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.room.fields.resp') }}
+                        </th>
+                        <td>
+                            {{ $room->resp }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.room.fields.resp_no') }}
+                        </th>
+                        <td>
+                            {{ $room->resp_no }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

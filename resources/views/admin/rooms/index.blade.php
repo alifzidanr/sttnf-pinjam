@@ -38,6 +38,12 @@
                             {{ trans('cruds.room.fields.location') }}
                         </th>
                         <th>
+                            {{ trans('cruds.event.fields.resp') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.event.fields.resp_no') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -62,6 +68,13 @@
                             </td>
                             <td>
                                 {{ $room->location ?? '' }}
+                            </td>
+                            <td>
+                                {{ $room->resp ?? '' }}
+                            </td>
+
+                            <td>
+                                {{ $room->resp_no ?? '' }}
                             </td>
                             <td>
                                 @can('room_show')
