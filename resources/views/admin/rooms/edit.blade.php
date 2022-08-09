@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label for="resp">{{ trans('cruds.room.fields.resp') }}</label>
-                <input class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text" name="resp" id="resp" value="{{ old('resp', '') }}">
+                <input class="form-control {{ $errors->has('resp') ? 'is-invalid' : '' }}" type="text" name="resp" id="resp" value="{{ old('resp', '') }}">
                 @if($errors->has('resp'))
                     <div class="invalid-feedback">
                         {{ $errors->first('resp') }}
