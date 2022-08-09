@@ -27,9 +27,8 @@
                             {{ trans('cruds.event.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.event.fields.send_email') }}
                             {{ trans('cruds.event.fields.accept') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.event.fields.deny') }}
                         </th>
                         <th>
@@ -80,14 +79,21 @@
                             </td>
                             <td>
                                 @can('event_accept')
+                                <a class="btn btn-info" href="{{ route('sendEmail', $event->user->id) }}">Kirim Notifikasi</a>
+                                @endcan
+
+                                @can('event_accept')
                                 <a class="btn btn-success" href="{{ route('accept', $event->id) }}">Terima</a>
                                 @endcan
-                            </td>
-                            <td>
-                                @can('event_accept')
-                                <a class="btn btn-danger" href="{{ route('deny', $event->id) }}">Tolak</a>
+
+                                @can('event_deny')
+                                <form action="{{ route('deny', $event->id) }}" method="GET" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-danger" value="{{ trans('global.reject') }}">
+                                </form>
                                 @endcan
                             </td>
+                        
                             <td>
                                 {{ $event->room->name ?? '' }}
                             </td>

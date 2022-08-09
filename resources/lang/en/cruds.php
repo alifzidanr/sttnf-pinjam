@@ -125,6 +125,8 @@ return [
             'accept_helper'      => '',
             'deny'               => '',
             'deny_helper'        => '',
+            'send_email'         => '',
+            'send_email_helper'  => '',
         ],
     ],
 ];

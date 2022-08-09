@@ -3,20 +3,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\PrintReportController;
 use App\Http\Controllers\Admin\EventsController;
+use App\Http\Controllers\EmailNotificationController;
 
 Route::get('/', [CustomAuthController::class, 'home']); 
 Route::get('signup', [CustomAuthController::class, 'signup'])->name('register');
 Route::post('postsignup', [CustomAuthController::class, 'signupsave'])->name('register');
 
 
-//tampilkan menu print
+//menu validasi
 Route::get('showpdf', [EventsController::class, 'showpdf'])->name('showpdf');
 Route::get('events/accept{id}',[EventsController::class, 'accept'])->name('accept');
 Route::get('events/deny{id}',[EventsController::class, 'deny'])->name('deny');
-
-// Route::get('/user/{id}/show', function ($events) {
-//     echo 'user Id = '.  $events;
-// })->name('show');
+Route::get('events/sendEmail{id}',[EventsController::class, 'sendEmail'])->name('sendEmail');
+//kirim email notifikasi
+// Route::get('/send_email', [EventsController::class, 'send_email'])->name('send_email');
 
 
 Route::redirect('/', '/login');

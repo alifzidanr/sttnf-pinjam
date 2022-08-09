@@ -13,6 +13,9 @@ use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Notifications\EventNotification;
+use Notification;
+use App\Http\Requests\SendEmailRequest;
 
 class EventsController extends Controller
 {
@@ -119,6 +122,18 @@ class EventsController extends Controller
         $event->status='Diterima';
         $event->save();
 
+        // $users = User::find($id);
+
+        // $EmailMessage = [
+        //     'body'      => 'Permintaan kamu telah diterima',
+        //     'isi_pesan' => 'Cek Ruangan',
+        //     'url'       => url('/'),
+        //     'thankyou'  => 'Terimakasih',
+        // ];
+
+        // // $users->notify(new EventNotification($EmailMessage));    
+        // Notification::send  ($users, new EventNotification($EmailMessage));
+
         return redirect()->back();
     }
 
@@ -130,4 +145,24 @@ class EventsController extends Controller
 
         return redirect()->back();
     }
+
+    public function sendEmail($id)
+    {
+        abort_if(Gate::denies('event_accept'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $users = User::find($id);
+
+        $EmailMessage = [
+            'body'      => 'Permintaan kamu telah diterima',
+            'isi_pesan' => 'Cek Ruangan',
+            'url'       => url('/'),
+            'thankyou'  => 'Terimakasih',
+        ];
+
+        // $users->notify(new EventNotification($EmailMessage));    
+        Notification::send  ($users, new EventNotification($EmailMessage));
+
+        return redirect()->back();
+
+    }
+
 }
