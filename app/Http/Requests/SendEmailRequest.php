@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\User;
+use App\Room;
 
 class SendEmailRequest extends FormRequest
 {

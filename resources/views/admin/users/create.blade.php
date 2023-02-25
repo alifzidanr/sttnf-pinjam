@@ -29,6 +29,18 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
             </div>
+
+            <div class="form-group">
+                <label class="required" for="usercontact">{{ trans('cruds.user.fields.usercontact') }}</label>
+                <input class="form-control {{ $errors->has('usercontact') ? 'is-invalid' : '' }}" type="text" name="usercontact" id="usercontact" value="{{ old('usercontact') }}" required>
+                @if($errors->has('usercontact'))
+                <div class="invalid-feedback">
+                {{ $errors->first('usercontact') }}
+            </div>
+            @endif
+                <span class="help-block">{{ trans('cruds.user.fields.usercontact_helper') }}</span>
+            </div>
+
             <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
                 <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>

@@ -41,12 +41,20 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.usercontact') }}
+                        </th>
+                        <td>
+                            {{ $user->usercontact }}
+                        </td>
+                    </tr>
+                    {{-- <tr>
+                        <th>
                             {{ trans('cruds.user.fields.email_verified_at') }}
                         </th>
                         <td>
                             {{ $user->email_verified_at }}
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>
                             {{ trans('cruds.user.fields.roles') }}

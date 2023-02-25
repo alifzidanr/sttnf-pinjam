@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \DateTimeInterface;
+use Illuminate\Notifications\Notifiable;
 
 class Room extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Notifiable;
 
     public $table = 'rooms';
 
@@ -28,6 +29,7 @@ class Room extends Model
         'location',
         'resp',
         'resp_no',
+        'email',
     ];
 
     protected function serializeDate(DateTimeInterface $date)

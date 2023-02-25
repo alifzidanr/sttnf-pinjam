@@ -15,8 +15,8 @@ Route::get('showpdf', [EventsController::class, 'showpdf'])->name('showpdf');
 Route::get('events/accept{id}',[EventsController::class, 'accept'])->name('accept');
 Route::get('events/deny{id}',[EventsController::class, 'deny'])->name('deny');
 Route::get('events/sendEmail{id}',[EventsController::class, 'sendEmail'])->name('sendEmail');
-//kirim email notifikasi
-// Route::get('/send_email', [EventsController::class, 'send_email'])->name('send_email');
+Route::get('events/cancelOrder{id}',[EventsController::class, 'cancelOrder'])->name('cancelOrder');
+Route::get('events/bookRoom{id}',[BookingsController::class, 'bookRoom'])->name('bookRoom');
 
 
 Route::redirect('/', '/login');
@@ -27,7 +27,6 @@ Route::get('/home', function () {
 
     return redirect()->route('admin.home');
 });
-
 
 
 route::auth();

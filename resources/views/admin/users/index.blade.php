@@ -22,14 +22,17 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.user.fields.id') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.usercontact') }}
                         </th>
                         {{-- <th>
                             {{ trans('cruds.user.fields.email_verified_at') }}
@@ -37,8 +40,8 @@
                         <th>
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
-                        <th>
-                            &nbsp;
+                        <th style="text-align:center">
+                            {{ trans('cruds.event.fields.option') }}
                         </th>
                     </tr>
                 </thead>
@@ -48,14 +51,17 @@
                             <td>
 
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $user->id ?? '' }}
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ $user->name ?? '' }}
                             </td>
                             <td>
                                 {{ $user->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->usercontact ?? '' }}
                             </td>
                             {{-- <td>
                                 {{ $user->email_verified_at ?? '' }}
@@ -65,7 +71,7 @@
                                     <span class="badge badge-info">{{ $item->title }}</span>
                                 @endforeach
                             </td>
-                            <td>
+                            <td style="text-align:center">
                                 @can('user_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
                                         {{ trans('global.view') }}

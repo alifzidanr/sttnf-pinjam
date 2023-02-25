@@ -191,6 +191,7 @@
         extend: 'pdf',
         className: 'btn-default',
         text: pdfButtonTrans,
+        orientation: 'landscape',
         exportOptions: {
           columns: ':visible'
         }

@@ -17,6 +17,7 @@ class AddLocationFieldToRoomsTable extends Migration
             $table->string('location');;
             $table->string('resp');;
             $table->string('resp_no');;
+            $table->string('email');;
         });
     }
 

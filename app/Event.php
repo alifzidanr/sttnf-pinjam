@@ -4,12 +4,11 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 use \DateTimeInterface;
 
 class Event extends Model
 {
-    use SoftDeletes;
 
     public $table = 'events';
 
@@ -27,6 +26,7 @@ class Event extends Model
         'deny',
         'room_id',
         'user_id',
+        'usercontact',
         'capacity',
         'end_time',
         'start_time',

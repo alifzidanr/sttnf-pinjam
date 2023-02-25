@@ -11,7 +11,7 @@ return [
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
-            'title'             => 'Title',
+            'title'             => 'Izin',
             'title_helper'      => '',
             'created_at'        => 'Created at',
             'created_at_helper' => '',
@@ -23,11 +23,11 @@ return [
     ],
     'role'           => [
         'title'          => 'Atur Peranan',
-        'title_singular' => 'Role',
+        'title_singular' => 'Peran',
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',
-            'title'              => 'Title',
+            'title'              => 'Peran',
             'title_helper'       => '',
             'permissions'        => 'Izin',
             'permissions_helper' => '',
@@ -40,7 +40,7 @@ return [
         ],
     ],
     'user'           => [
-        'title'          => 'Users',
+        'title'          => 'User',
         'title_singular' => 'User',
         'fields'         => [
             'id'                       => 'ID',
@@ -51,6 +51,8 @@ return [
             'email_helper'             => '',
             'email_verified_at'        => 'Email terverifikasi pada',
             'email_verified_at_helper' => '',
+            'usercontact'              => 'Kontak User',
+            'usercontact_helper'       => '',
             'password'                 => 'Password',
             'password_helper'          => '',
             'roles'                    => 'Peran',
@@ -89,6 +91,8 @@ return [
             'resp_helper'        => '',
             'resp_no'            => 'Kontak',
             'resp_no_helper'     => '',
+            'email'              => 'Email Penanggung Jawab',
+            'email_helper'     => '',
         ],
     ],
     'event'          => [
@@ -97,10 +101,14 @@ return [
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',
+            'action'             => 'Aksi',
+            'action_helper'             => '',
             'room'               => 'Ruangan',
             'room_helper'        => '',
             'user'               => 'User',
             'user_helper'        => '',
+            'usercontact'        => 'Kontak User',
+            'usercontact_helper'        => '',
             'title'              => 'Keperluan',
             'title_helper'       => '',
             'start_time'         => 'Mulai',
@@ -117,7 +125,7 @@ return [
             'deleted_at_helper'  => '',
             'resp'               => 'Penanggung Jawab',
             'resp_helper'        => '',
-            'resp_no'            => 'Kontak',
+            'resp_no'            => 'Kontak Penanggung Jawab',
             'resp_no_helper'     => '',
             'status'             => 'Status',
             'status_helper'      => '',
@@ -127,6 +135,8 @@ return [
             'deny_helper'        => '',
             'send_email'         => '',
             'send_email_helper'  => '',
+            'option'             => 'Opsi',
+            'option_helper'      => '',
         ],
     ],
 ];

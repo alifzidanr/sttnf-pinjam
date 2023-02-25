@@ -118,7 +118,7 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '28',
-                'title' => 'event_showpdf',
+                'title' => 'event_showcontact',
             ],
             [
                 'id'    => '29',
@@ -127,6 +127,10 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => '30',
                 'title' => 'event_deny',
+            ],
+            [
+                'id'    => '31',
+                'title' => 'event_cancel',
             ],
 
         ];

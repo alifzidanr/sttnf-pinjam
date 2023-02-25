@@ -15,7 +15,8 @@ class CreateRoomsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('location');
             $table->string('resp');
-            $table->string('resp_no');    
+            $table->string('resp_no'); 
+            $table->string('email');   
             $table->timestamps();
             $table->softDeletes();
         });

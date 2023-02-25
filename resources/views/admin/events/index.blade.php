@@ -26,21 +26,28 @@
                         <th>
                             {{ trans('cruds.event.fields.id') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.event.fields.send_email') }}
-                            {{ trans('cruds.event.fields.accept') }}
-                            {{ trans('cruds.event.fields.deny') }}
+                        @can('event_accept')
+                        <th style="text-align:center">
+                            {{ trans('cruds.event.fields.action') }}
                         </th>
-                        <th>
+                        @endcan  
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.room') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.user') }}
                         </th>
-                        <th>
+
+                        @can('event_accept')
+                        <th style="text-align:center">
+                            {{ trans('cruds.event.fields.usercontact') }}
+                        </th>
+                        @endcan
+
+                        <th style="text-align:center">
                             {{ trans('cruds.room.fields.capacity') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.title') }}
                         </th>
                         <th>
@@ -49,21 +56,25 @@
                         <th>
                             {{ trans('cruds.event.fields.end_time') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.description') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.resp') }}
                         </th>
-                        <th>
+                        @can('event_showcontact')
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.resp_no') }}
                         </th>
-                        <th>
+                        @endcan
+                        {{-- <th style="text-align:center">
+                            {{ trans('cruds.room.fields.email') }}
+                        </th> --}}
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.status') }}
                         </th>
-                        
-                        <th>
-                            &nbsp;
+                        <th style="text-align:center">
+                            {{ trans('cruds.event.fields.option') }}
                         </th>
                     </tr>
                 </thead>
@@ -77,33 +88,40 @@
                             <td>
                                 {{ $event->id ?? '' }}
                             </td>
-                            <td>
-                                @can('event_accept')
-                                <a class="btn btn-info" href="{{ route('sendEmail', $event->user->id) }}">Kirim Notifikasi</a>
-                                @endcan
 
-                                @can('event_accept')
-                                <a class="btn btn-success" href="{{ route('accept', $event->id) }}">Terima</a>
-                                @endcan
+                            @can('event_accept')
+                            <td style="text-align:center">
+                                <form action="{{ route('accept', $event->id) }}" onsubmit="return confirm('{{ trans('global.accept') }}');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-success" value="{{ trans('global.terima') }}">
+                                    </form>
 
                                 @can('event_deny')
-                                <form action="{{ route('deny', $event->id) }}" method="GET" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                <form action="{{ route('deny', $event->id) }}" onsubmit="return confirm('{{ trans('global.reject') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="btn btn-danger" value="{{ trans('global.reject') }}">
-                                </form>
+                                    <input type="submit" class="btn btn-danger" value="{{ trans('global.tolak') }}">
+                                    </form>
                                 @endcan
                             </td>
+                            @endcan
                         
-                            <td>
+                            <td style="text-align:center">
                                 {{ $event->room->name ?? '' }}
                             </td>
-                            <td>
+                            <td style="text-align:center">
                                 {{ $event->user->name ?? '' }}
                             </td>
+
+                            @can('event_accept')
                             <td>
+                                {{ $event->user->usercontact ?? '' }}
+                            </td>
+                            @endcan
+
+                            <td style="text-align:center">
                                 {{ $event->room->capacity ?? '' }}
                             </td>
-                            <td>
+                            <td style="text-align:center">
                                 {{ $event->title ?? '' }}
                             </td>
                             <td>
@@ -119,15 +137,37 @@
                             <td>
                                 {{ $event->room->resp ?? '' }}
                             </td>
-
+                              
+                            @can('event_showcontact')
                             <td>
                                 {{ $event->room->resp_no ?? '' }}
                             </td>
+                            @endcan
 
-                            <td>
-                                {{ $event->status ?? '' }}
+                            
+                            <td style="font-size: 18px;" class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <span class="badge badge-lg
+                                        @if($event->status == 'Diterima') 
+                                            badge-success
+                                        @elseif($event->status == 'Ditolak')
+                                            badge-danger
+                                        @else 
+                                            badge-secondary 
+                                        @endif">
+                                        
+                                        {{ $event->status ?? '' }}
+                                    </span> 
+                                </div>
                             </td>
-                            <td>
+                            
+                            
+                            
+                            
+                            
+                            <td style="text-align:center">
+                               
+                                
                                 @can('event_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.events.show', $event->id) }}">
                                         {{ trans('global.view') }}

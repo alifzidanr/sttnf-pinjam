@@ -28,7 +28,7 @@
                         <th>
                             {{ trans('cruds.room.fields.name') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.room.fields.capacity') }}
                         </th>
                         <th>
@@ -37,14 +37,17 @@
                         <th>
                             {{ trans('cruds.room.fields.location') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.resp') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.event.fields.resp_no') }}
                         </th>
-                        <th>
-                            &nbsp;
+                        <th style="text-align:center">
+                            {{ trans('cruds.room.fields.email') }}
+                        </th>
+                        <th style="text-align:center">
+                            {{ trans('cruds.event.fields.option') }}
                         </th>
                     </tr>
                 </thead>
@@ -60,7 +63,7 @@
                             <td>
                                 {{ $room->name ?? '' }}
                             </td>
-                            <td>
+                            <td style="text-align:center">
                                 {{ $room->capacity ?? '' }}
                             </td>
                             <td>
@@ -77,6 +80,9 @@
                                 {{ $room->resp_no ?? '' }}
                             </td>
                             <td>
+                                {{ $room->email ?? '' }}
+                            </td>
+                            <td style="text-align:center">
                                 @can('room_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.rooms.show', $room->id) }}">
                                         {{ trans('global.view') }}

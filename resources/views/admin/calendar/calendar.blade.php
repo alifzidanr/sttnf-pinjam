@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="room_id">Room</label>
+                        <label for="room_id">Ruangan</label>
                         <select class="form-control select2" name="room_id" id="room_id">
                             @foreach($rooms as $id => $room)
                                 <option value="{{ $id }}" {{ request()->input('room_id') == $id ? 'selected' : '' }}>{{ $room }}</option>

@@ -17,6 +17,7 @@ use App\Notifications\EventNotification;
 use Notification;
 use App\Http\Requests\SendEmailRequest;
 
+
 class EventsController extends Controller
 {
     public function index()
@@ -44,7 +45,7 @@ class EventsController extends Controller
         if ($eventService->isRoomTaken($request->all())) {
             return redirect()->back()
                     ->withInput($request->input())
-                    ->withErrors('This room is not available at the time you have chosen');
+                    ->withErrors('Ruangan tidak tersedia dengan waktu yang ditentukan');
         }
 
         $event = Event::create($request->all());
@@ -118,21 +119,14 @@ class EventsController extends Controller
 
     public function accept($id){
         abort_if(Gate::denies('event_accept'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+       
         $event=Event::find($id);
         $event->status='Diterima';
         $event->save();
 
-        // $users = User::find($id);
-
-        // $EmailMessage = [
-        //     'body'      => 'Permintaan kamu telah diterima',
-        //     'isi_pesan' => 'Cek Ruangan',
-        //     'url'       => url('/'),
-        //     'thankyou'  => 'Terimakasih',
-        // ];
-
-        // // $users->notify(new EventNotification($EmailMessage));    
-        // Notification::send  ($users, new EventNotification($EmailMessage));
+        if ($event->save()) {
+            return redirect()->route('sendEmail', $event->user->id);
+        }
 
         return redirect()->back();
     }
@@ -141,7 +135,11 @@ class EventsController extends Controller
         abort_if(Gate::denies('event_deny'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $event=Event::find($id);
         $event->status='Ditolak';
-        $event->delete();
+        $event->save();
+
+        if ($event->save()) {
+            return redirect()->route('sendEmail', $event->user->id);
+        }
 
         return redirect()->back();
     }
@@ -152,17 +150,26 @@ class EventsController extends Controller
         $users = User::find($id);
 
         $EmailMessage = [
-            'body'      => 'Permintaan kamu telah diterima',
-            'isi_pesan' => 'Cek Ruangan',
+            'body'      => 'Permintaan Anda telah kami beri respon. Silakan cek status permintaan Anda dengan mengklik tombol berikut :',
+            'isi_pesan' => 'Cek Jadwal',
             'url'       => url('/'),
-            'thankyou'  => 'Terimakasih',
+            'penutup'  => 'Jika ada pertanyaan atau keluhan, silakan hubungi nomor kontak penanggung jawab ruangan yang bersangkutan. Terimakasih',
         ];
-
-        // $users->notify(new EventNotification($EmailMessage));    
+    
         Notification::send  ($users, new EventNotification($EmailMessage));
 
         return redirect()->back();
+    }
 
+    public function cancelOrder($id){
+        abort_if(Gate::denies('event_cancel'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $event=Event::find($id);
+        $event->delete();
+        return redirect()->route('admin.events.index');
     }
 
 }
+
+    
+
+

@@ -25,11 +25,11 @@
                         <th>
                             {{ trans('cruds.permission.fields.id') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.permission.fields.title') }}
                         </th>
-                        <th>
-                            &nbsp;
+                        <th style="text-align:center">
+                            {{ trans('cruds.event.fields.option') }}
                         </th>
                     </tr>
                 </thead>
@@ -45,7 +45,7 @@
                             <td>
                                 {{ $permission->title ?? '' }}
                             </td>
-                            <td>
+                            <td style="text-align:center">
                                 @can('permission_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.permissions.show', $permission->id) }}">
                                         {{ trans('global.view') }}

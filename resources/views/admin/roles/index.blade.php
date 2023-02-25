@@ -25,14 +25,14 @@
                         <th>
                             {{ trans('cruds.role.fields.id') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.role.fields.title') }}
                         </th>
-                        <th>
+                        <th style="text-align:center">
                             {{ trans('cruds.role.fields.permissions') }}
                         </th>
-                        <th>
-                            &nbsp;
+                        <th style="text-align:center">
+                            {{ trans('cruds.event.fields.option') }}
                         </th>
                     </tr>
                 </thead>
@@ -53,7 +53,7 @@
                                     <span class="badge badge-info">{{ $item->title }}</span>
                                 @endforeach
                             </td>
-                            <td>
+                            <td style="text-align:center">
                                 @can('role_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.roles.show', $role->id) }}">
                                         {{ trans('global.view') }}

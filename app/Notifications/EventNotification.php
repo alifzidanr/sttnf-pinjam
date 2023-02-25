@@ -45,7 +45,7 @@ class EventNotification extends Notification
         return (new MailMessage)
                     ->line($this->EmailMessage['body'])
                     ->action($this->EmailMessage['isi_pesan'], $this->EmailMessage ['url'])
-                    ->line($this->EmailMessage['thankyou']);
+                    ->line($this->EmailMessage['penutup']);
     }
 
     /**

@@ -31,46 +31,34 @@ class EventService
 
     public function isRoomTaken($requestData)
     {
-        // $recurringUntil = Carbon::parse($requestData['recurring_until'])->setTime(23, 59, 59);
-        $start_time     = Carbon::parse($requestData['start_time']);
-        $end_time       = Carbon::parse($requestData['end_time']);
-        $events         = Event::where('room_id', $requestData['room_id'])->get();
-
-        // do {
-        //     if (
-        //         $events->where('start_time', '<', $start_time)->where('end_time', '>', $start_time)->count() ||
-        //         $events->where('start_time', '<', $end_time)->where('end_time', '>', $end_time)->count() ||
-        //         $events->where('start_time', '<', $start_time)->where('end_time', '>', $end_time)->count()
-        //     ) {
-        //         return true;
-        //     }
-
-        //     $start_time->addWeek();
-        //     $end_time->addWeek();
-        // } while ($end_time->lte($recurringUntil));
-
-        // return false;
+        $start_time = Carbon::parse($requestData['start_time']);
+        $end_time = Carbon::parse($requestData['end_time']);
+        
+        $events = Event::where('room_id', $requestData['room_id'])
+                       ->where('status', 'Diterima')
+                       ->where(function ($query) use ($start_time, $end_time) {
+                            // Check for overlapping events
+                            $query->whereBetween('start_time', [$start_time, $end_time])
+                                  ->orWhereBetween('end_time', [$start_time, $end_time])
+                                  ->orWhere(function ($query) use ($start_time, $end_time) {
+                                        // Check if event is within the time range
+                                        $query->where('start_time', '<=', $start_time)
+                                              ->where('end_time', '>=', $end_time);
+                                   });
+                        })
+                       ->get();
+                       
+        return $events->isNotEmpty();
     }
+    
 
-    // public function chargeHourlyRate($requestData, Room $room)
+
+    // public function isRoomTaken($requestData)
     // {
-    //     if (!$room->hourly_rate) {
-    //         return true;
-    //     }
-
     //     // $recurringUntil = Carbon::parse($requestData['recurring_until'])->setTime(23, 59, 59);
     //     $start_time     = Carbon::parse($requestData['start_time']);
     //     $end_time       = Carbon::parse($requestData['end_time']);
-    //     $hours          = (int) ceil($end_time->diffInMinutes($start_time) / 60);
-    //     $totalHours     = 0;
+    //     $events         = Event::where('room_id', $requestData['room_id'])->get();
 
-    //     do {
-    //         $totalHours += $hours;
-
-    //         $start_time->addWeek();
-    //         $end_time->addWeek();
-    //     } while ($end_time->lte($recurringUntil));
-
-    //     return auth()->user()->chargeCredits($totalHours, $room);
     // }
 }
