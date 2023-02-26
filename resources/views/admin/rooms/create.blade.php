@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="capacity">{{ trans('cruds.room.fields.capacity') }}</label>
-                <input class="form-control {{ $errors->has('capacity') ? 'is-invalid' : '' }}" type="number" name="capacity" id="capacity" value="{{ old('capacity', '') }}" step="1" required>
+                <input class="form-control {{ $errors->has('capacity') ? 'is-invalid' : '' }}" type="number" name="capacity" id="capacity" value="{{ old('capacity', '') }}" step="1" min="10" max="100" required>
                 @if($errors->has('capacity'))
                     <div class="invalid-feedback">
                         {{ $errors->first('capacity') }}
@@ -61,7 +61,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="resp_no">{{ trans('cruds.room.fields.resp_no') }}</label>
-                <input class="form-control {{ $errors->has('resp_no') ? 'is-invalid' : '' }}" type="text" name="resp_no" id="resp_no" value="{{ old('resp_no', '') }}" required>
+                <input class="form-control {{ $errors->has('resp_no') ? 'is-invalid' : '' }}" pattern="[0-9]{12}" type="text" name="resp_no" id="resp_no" value="{{ old('resp_no', '') }}" required>
                 @if($errors->has('resp_no'))
                     <div class="invalid-feedback">
                         {{ $errors->first('resp_no') }}

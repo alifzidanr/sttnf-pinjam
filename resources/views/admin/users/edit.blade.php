@@ -34,7 +34,7 @@
 
             <div class="form-group">
                 <label class="required" for="usercontact">{{ trans('cruds.user.fields.usercontact') }}</label>
-                <input class="form-control {{ $errors->has('usercontact') ? 'is-invalid' : '' }}" type="text" name="usercontact" id="usercontact" value="{{ old('usercontact', $user->usercontact) }}" required>
+                <input class="form-control {{ $errors->has('usercontact') ? 'is-invalid' : '' }}" pattern="[0-9]{12}" type="text" name="usercontact" id="usercontact" value="{{ old('usercontact', $user->usercontact) }}" required>
                 @if($errors->has('usercontact'))
                 <div class="invalid-feedback">
                 {{ $errors->first('usercontact') }}

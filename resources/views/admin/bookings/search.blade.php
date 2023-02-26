@@ -27,7 +27,7 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <input class="form-control" type="number" name="capacity" id="capacity" value="{{ request()->input('capacity') }}" placeholder="{{ trans('cruds.room.fields.capacity') }}" step="1"  min="10" max="20" required>
+                        <input class="form-control" type="number" name="capacity" id="capacity" value="{{ request()->input('capacity') }}" placeholder="{{ trans('cruds.room.fields.capacity') }}" step="1"  min="10" max="100" required>
                     </div>
                 </div>
                
