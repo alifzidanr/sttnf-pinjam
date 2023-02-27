@@ -22,26 +22,28 @@ class SystemCalendarController extends Controller
     ];
 
     public function index(Request $request)
-    {
-        $events = [];
-        $rooms = Room::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+{
+    $events = [];
+    $rooms = Room::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+    $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        foreach ($this->sources as $source) {
-            $models = $source['model']::when($request->input('room_id'), function ($query) use ($request) {
-                    $query->where('room_id', $request->input('room_id'));
-                })
-                ->when($request->input('user_id'), function ($query) use ($request) {
-                    $query->where('user_id', $request->input('user_id'));
-                })
-                ->get();
-            foreach ($models as $model) {
-                $crudFieldValue = $model->getOriginal($source['date_field']);
+    foreach ($this->sources as $source) {
+        $models = $source['model']::when($request->input('room_id'), function ($query) use ($request) {
+                $query->where('room_id', $request->input('room_id'));
+            })
+            ->when($request->input('user_id'), function ($query) use ($request) {
+                $query->where('user_id', $request->input('user_id'));
+            })
+            ->get();
+        foreach ($models as $model) {
+            $crudFieldValue = $model->getOriginal($source['date_field']);
 
-                if (!$crudFieldValue) {
-                    continue;
-                }
+            if (!$crudFieldValue) {
+                continue;
+            }
 
+            // Check if the event has a "Diterima" status
+            if ($model->status === 'Diterima') {
                 $events[] = [
                     'title' => trim($source['prefix'] . " " . $model->{$source['field']}
                         . " " . $source['suffix']),
@@ -49,11 +51,13 @@ class SystemCalendarController extends Controller
                     'url'   => route($source['route'], $model->id),
                 ];
             }
-
         }
 
-        return view('admin.calendar.calendar', compact('events', 'rooms', 'users'));
-
     }
+
+    return view('admin.calendar.calendar', compact('events', 'rooms', 'users'));
+
+}
+
 
 }
