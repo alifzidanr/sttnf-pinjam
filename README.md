@@ -1,9 +1,27 @@
+# Sistem Reservasi Ruangan STTNF
+
+Proyek GitHub ini merinci pembangunan aplikasi reservasi ruangan kampus berdasarkan permintaan dari Badan Sarana dan Prasarana STTNF. Aplikasi dibuat menggunakan framework Laravel dengan template QuickAdminPanel dan beberapa plugin. Proyek ini mengikuti metodologi Rational Unified Process (RUP) untuk dokumentasi, memastikan pendekatan pengembangan perangkat lunak yang sistematis dan terstruktur. Aplikasi bertujuan untuk menyederhanakan proses reservasi ruangan kampus, meningkatkan efisiensi Badan Sarana dan Prasarana STTNF.
+
 ## Cara Penggunaan
 
-- Kloning repository dengan __git clone__ atau download zip
-- Salin file __.env.example__ ke __.env__ dan edit credential database di sana
-- Jalankan __composer install__
-- Jalankan __php artisan key:generate__
-- Jalankan __php artisan migration --seed__ (import seed data untuk login ke sistem)
-- Jalankan URL utama dengan __php artisan serve__
-- Login dengan __admin@admin.com__ - __password__
+```bash
+# 1. Kloning repository
+git clone <repository-url>
+
+# 2. Salin file .env.example ke .env dan edit credential database di sana.
+cp .env.example .env
+
+# 3. Jalankan composer install.
+composer install
+
+# 4. Jalankan php artisan key:generate.
+php artisan key:generate
+
+# 5. Jalankan php artisan migrate untuk menjalankan migrasi database.
+php artisan migrate
+
+# 6. Jalankan php artisan migrate --seed untuk mengimport seed data untuk login ke sistem.
+php artisan migrate --seed
+
+# 7. Jalankan URL utama dengan php artisan serve.
+php artisan serve
